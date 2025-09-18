@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Sistema de Registro{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="fade-in-up">
+                    <h1 class="display-4 fw-bold mb-4">
+                        <i class="bi bi-shield-check me-3"></i>
+                        Bienvenido al Sistema de Registro
+                    </h1>
+                    <p class="lead mb-4">
+                        Un sistema seguro y fácil de usar para registrar y gestionar usuarios. 
+                        Desarrollado con Django y PostgreSQL para garantizar la máxima seguridad de tus datos.
+                    </p>
+                    {% if not user.is_authenticated %}
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="{% url 'register' %}" class="btn btn-light btn-lg px-4 py-2">
+                                <i class="bi bi-person-plus me-2"></i>Registrarse Ahora
+                            </a>
+                            <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg px-4 py-2">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="{% url 'dashboard' %}" class="btn btn-light btn-lg px-4 py-2">
+                                <i class="bi bi-speedometer2 me-2"></i>Ir al Dashboard
+                            </a>
+                            <a href="{% url 'profile' %}" class="btn btn-outline-light btn-lg px-4 py-2">
+                                <i class="bi bi-person me-2"></i>Ver Perfil
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <div class="fade-in-up">
+                    <i class="bi bi-people-fill" style="font-size: 15rem; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="fw-bold text-primary">Características del Sistema</h2>
+                <p class="lead text-muted">Todo lo que necesitas para gestionar usuarios de forma eficiente</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-shield-lock-fill fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Seguro</h5>
+                        <p class="card-text">
+                            Autenticación segura con validación de contraseñas y protección contra ataques comunes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-speedometer2 fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Rápido</h5>
+                        <p class="card-text">
+                            Registro e inicio de sesión rápidos con una interfaz intuitiva y responsive.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="bg-warning text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-database-fill fs-4"></i>
+                        </div>
+                        <h5 class="card-title">Confiable</h5>
+                        <p class="card-text">
+                            Base de datos PostgreSQL para garantizar la integridad y persistencia de los datos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+{% if user.is_authenticated %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <i class="bi bi-person-check-fill text-primary fs-1 mb-3"></i>
+                    <h5>Usuario Activo</h5>
+                    <p class="text-muted">Tu cuenta está activa y verificada</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <i class="bi bi-calendar-check-fill text-success fs-1 mb-3"></i>
+                    <h5>Último Acceso</h5>
+                    <p class="text-muted">{{ user.last_login|date:"d/m/Y H:i" }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-card">
+                    <i class="bi bi-shield-check-fill text-info fs-1 mb-3"></i>
+                    <h5>Cuenta Segura</h5>
+                    <p class="text-muted">Tu información está protegida</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+{% if not user.is_authenticated %}
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="fw-bold mb-4">¿Listo para comenzar?</h3>
+                <p class="lead mb-4">
+                    Únete a nuestra plataforma y disfruta de una experiencia de usuario excepcional.
+                </p>
+                <a href="{% url 'register' %}" class="btn btn-light btn-lg px-5 py-3">
+                    <i class="bi bi-person-plus me-2"></i>Crear Cuenta Gratis
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

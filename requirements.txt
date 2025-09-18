@@ -1,0 +1,22 @@
+# Django y dependencias principales
+Django==5.2.6
+
+# Base de datos PostgreSQL
+psycopg2-binary==2.9.9
+
+# Base de datos SQL Server
+django-mssql-backend==2.8.1
+pyodbc==5.0.1
+
+# Utilidades para el desarrollo
+python-decouple==3.8
+
+# Pillow para manejo de imágenes (opcional, para futuras mejoras)
+Pillow==10.0.1
+
+# Timezone support
+pytz==2023.3
+
+# Para desarrollo (opcionales)
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
